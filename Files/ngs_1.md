@@ -7,13 +7,13 @@ mkdir Data
 mkdir Results
 ```
 ```
-MS=~/Software/msdir/ms
-SAMTOOLS=samtools
+MS=~/Software/msms/bin/msms
+SAMTOOLS=~/Software/samtools-1.5/samtools
 ANGSD=~/Software/angsd
 NGSTOOLS=~/Software/ngsTools
 ```
 
-We are using the commonly used software [ms](http://home.uchicago.edu/rhudson1/source/mksamples.html) to perform coalescent simulations under neutrality.
+We are using the software [msms](http://www.mabs.at/ewing/msms/download.shtml) to perform coalescent simulations under neutrality (and with selection, as we will see later).
 Please follow the link to get the manual, if interested (but not required).
 
 We also use a model previously estimated [here](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000695) for the evolution of Africans, Europeans and East Asians.
@@ -25,7 +25,7 @@ We are now simulating some genomic data (2Mbp) for 2 populations of 10 diploid i
 
 We can generate such data with the following command:
 ```
-	$MS 40 1 -t 1500 -r 1500 2000000 -I 4 0 0 20 20 -n 1 1.68 -n 2 3.73 -n 3 7.29 -n 4 0.25 -eg 0 2 116 -eg 0 3 160 -ma x 0.88 0.56 0.00 0.88 x 2.79 0.00 0.56 2.79 x 0.00 0.00 0.00 0.00 x -ej 0.027 4 3 -ej 0.029 3 2 -en 0.029 2 0.29 -en 0.30 1 1 > Data/pops.ms
+	$MS -ms 40 1 -t 1500 -r 1500 2000000 -I 4 0 0 20 20 -n 1 1.68 -n 2 3.73 -n 3 7.29 -n 4 0.25 -eg 0 2 116 -eg 0 3 160 -ma x 0.88 0.56 0.00 0.88 x 2.79 0.00 0.56 2.79 x 0.00 0.00 0.00 0.00 x -ej 0.027 4 3 -ej 0.029 3 2 -en 0.029 2 0.29 -en 0.30 1 1 -seed 1234 > Data/pops.ms
 ```
 
 Let's produce a reference sequence (with all As) and index it:
@@ -106,6 +106,8 @@ Can we do even better?
 
 (filter based on geno probs and allele freq?)
 
+solution on a different file
+
 Use an informative prior and filter for minor allele frq
 ```
 	$ANGSD/angsd -glf Data/pops.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doMajorMinor 4 -doMaf 1 -doPost 1 -doGeno 32 -minMaf 0.02 -out Results/pops.inf.bin
@@ -137,9 +139,6 @@ Genetic distances and plot a tree or do a MDS
 
 
 
-** EXERCISE **
-
-do a sliding window (solutions on a different file)
 
 
 
