@@ -89,12 +89,40 @@ Do they behave as expected (given what we know about human evolution)?
 
 ----------------------------------------------------------------------
 
+Now we can use such SFS as prior information to improve our estimation of genetic diversity.
+Let's calculate some diversity indexes.
 
-theta
+```
+	NIND=10
+	for i in `seq 1 2`;
+	do
+		$ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doSaf 1 -doThetas 1 -pest Results/pop$i.sfs -out Results/pop$i
+		$ANGSD/angsd -bam bam.filelis -out out -doThetas 1 -doSaf 1 -pest out.sfs -anc chimpHg19.fa -GL
+		$ANGSD/misc/thetaStat do_stat Results/pop$i.thetas.idx
+	done
+```
 
-pi
+Open
+```
+	cat Results/pop?.thetas.idx.pestPG
+```
 
-Tajima's D
+**QUESTION**
+
+Comment on theta and Tajima's D.
+
+------------------------------------------------------------------------------------
+
+**EXERCISE**
+
+Do a sliding window for Tajima's D and plot it.
+
+give tips and point to appropriate manual
+
+then give link to a possible solution
+
+
+-----------------------------------------------------------------------------------
 
 ## Additional
 
