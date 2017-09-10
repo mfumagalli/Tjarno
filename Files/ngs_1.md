@@ -32,7 +32,7 @@ Let's produce a reference sequence (with all As) and index it:
 ```
 	Rscript -e 'cat(">ref\n",paste(rep("A",2e6),sep="", collapse=""),"\n",sep="")' > Data/ref.fa 
 	$SAMTOOLS faidx Data/ref.fa
-``
+```
 
 Now we need to simulate sequencing data.
 You can decide the average depth per site per sample (pick sometyhing between 2 and 8) and the sequencing error rate.

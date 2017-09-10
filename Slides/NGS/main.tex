@@ -1,22 +1,14 @@
 \documentclass{beamer}
-%%%%%% UNOFFICIAL ICL BEAMER TEMPLATE V.0.1 %%%%%%
-% This is a basic LaTeX Beamer template that I customised to have the logo of ICL and a background picture. Mind that this is NOT an official ICL template but it may still be useful for informal presentations.
-% The official ICL graphical identity resources can be found here: http://www3.imperial.ac.uk/graphicidentity
-% Please drop me an e-mail or comment via Twitter @AJunyentFerre if you found this was useful or have any suggestion to improve it.
-%%%%%%
 
 \usepackage[english]{babel}
+\usepackage{url}
 
-%%%%%% THE FOLLOWING FILE CONTAINS THE STYLE DEFINITIONS %%%%%%
 \input{header.tex}
-%%%%%%
 
-%%%%%% TITLE, AUTHOR, DATE DEFINITIONS %%%%%%
-\title{Introduction to NGS data}
-\subtitle{{\it Principles of genotype and SNP calling\\ and estimation of allele frequencies}}
+\title{NGS data: Beauty and the Beast}
+\subtitle{{\it How to infer population genetics parameters from messy sequencing data}}
 \author{Matteo Fumagalli}
-\date{$22^{nd}$ August 2017}
-%%%%%%
+\date{$12^{th}$ September 2017}
 
 \begin{document}
 
@@ -25,6 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \frame{
+\frametitle{Goal of the day}
 
 	\begin{figure}
 		\includegraphics[scale=0.35]{Pics/bioinfo}
@@ -38,6 +31,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% data and issues
 \include{introduction}
 
 % Genotype likelihoods
