@@ -1,4 +1,11 @@
 
+## Allele frequencies
+
+
+
+
+## Sample allele frequencies likelihoods and probabilities
+
 For each population, we are now calculating the sample allele frequency probabilities (what we call .saf files).
 ```
 	NIND=10
@@ -47,6 +54,8 @@ Use an informative prior and filter for minor allele frq
 
 
 ------------------------------------------------------------------------------
+
+
 
 Now we estimate some summary statistics.
 For instance, we can calculate the expected number of polymorphic sites in our region, in both populations separately.
