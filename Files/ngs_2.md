@@ -19,8 +19,8 @@ echo $NSITES
 ```
 
 The standard approach is to assign individual genotypes and calculate the covariance matrix as in Patterson et al. 2006.
-This can be achieved by using ngsCovar package in ngsTools:
-if you type:
+This can be achieved by using ngsCovar package in ngsTools.
+If you type:
 ```
 $NGSTOOLS/ngsPopGen/ngsCovar
 ```
@@ -38,6 +38,14 @@ You need to specify the number of sites and samples:
 $NGSTOOLS/ngsPopGen/ngsCovar -probfile Results/pops.flat.bin.geno -outfile Results/pops.flat.covar -nind $NIND -nsites $NSITES -call 1 -norm 1
 ```
 
+**QUESTION**
+Look at the messages in std output.
+It looks like, on average, the program analyses less than 9,000 sites out of windows of 20,000.
+Why?
+What are these "skipped" sites?
+
+------------------------------------------------------------------
+
 For plotting purposes, we need to create a plink cluster file to assign each sample to a population.
 This is achieved using:
 ```
@@ -48,6 +56,9 @@ Finally, we are able to perform an eigenvector decomposition of the covariance m
 ```
 Rscript $NGSTOOLS/Scripts/plotPCA.R -i Results/pops.flat.covar -a Results/pops.clst -c 1-2 -o Results/pops.flat.pca.pdf
 ```
+You need optparse and ggplot2 R packages to run this.
+If you have errors, do `sudo R; install.packages("name"); q()`.
+Since you are here, you may also want to install plot3D package.
 
 **QUESTION**
 Look at the plot:
@@ -59,6 +70,7 @@ What's wrong here?
 --------------------------------------------------
 
 **EXERCISE**
+
 What can you do to improve your PCA?
 Perhaps we can estimate the covariance matrix by not calling genotypes but rather using their probabilities.
 Look at the help message at `$NGSTOOLS/ngsPopGen/ngsCovar` to see how you can achieve this.
@@ -69,10 +81,10 @@ A possible solution is available [here](https://github.com/mfumagalli/Tjarno/edi
 
 
 
+-----------------------------------------------------------------------------------------------------------------
 
 
-
-## Very optional: genetic distances
+## Very very optional: genetic distances
 
 We can compute genetic distances as a basis for population clustering driectly from genotype probabilities, and not from assigned genotypes as we have seen how problematic these latters can be at low-depth.
 
@@ -112,8 +124,6 @@ Finally, we plot the tree.
 Rscript $NGSTOOLS/Scripts/plotTree.R Results/pops.tree
 evince Results/pops.tree.pdf
 ```
-
-
 
 
 
