@@ -147,23 +147,13 @@
 	\end{itemize}
 	\end{block}
 
+	Call a SNP if
+	\begin{equation*}
+        	\hat{f} \geq t
+	\end{equation*}
+	where $t$ can be the minimum sample allele frequency detectable (e.g. $t=1/2N$ with $N$ diploids).
 
 }
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\frame{
-\frametitle{SNP calling}
-
-Call a SNP if
-\begin{equation*}
-	\hat{f} \geq t
-\end{equation*}
-where $t$ can be the minimum sample allele frequency detectable (e.g. $t=1/2N$ with $N$ diploids).
-
-}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -189,9 +179,11 @@ where $T$ is $\chi^2$ distributed with 1 degree of freedom.
 \begin{frame}
 \frametitle{Exercise 3}
 
-Estimate allele frequencies and call SNPs
+	Estimate allele frequencies and call SNPs.
 
-calculate PCA with some filtering
+	Assess the accuracy using different thresholds.
+
+	Perform a new PCA with data filtering.
 
 \end{frame}
 
