@@ -50,7 +50,7 @@ Then you have to create variables to store the path to these software.
 For instance, these are mine:
 ```
 MS=~/Software/msms/bin/msms
-SAMTOOLS=~/Software/samtools-1.5/samtools
+SAMTOOLS=samtools
 ANGSD=~/Software/angsd
 NGSTOOLS=~/Software/ngsTools
 ```
