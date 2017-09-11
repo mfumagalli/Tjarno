@@ -135,7 +135,7 @@ $ANGSD/angsd -doMajorMinor
 ```
 will tell you the available methods to assign the two most probable alleles.
 
-**QUESTION**
+**EXERCISE**
 Assuming that this is the backbone of your command line (you can't copy and paste this):
 ```
 NIND=20
@@ -143,6 +143,7 @@ $ANGSD/angsd -glf Data/pops.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 
 ```
 try to assign the most appropriate value for each parameter set as '???' by looking at the help pages `$ANGSD/angsd -doGeno` and `$ANGSD/angsd -doMajorMinor`.
 For instance, assume that (i) you want one of the two alleles to be the reference one (hint: look at -doMajorMinor), (ii) you want to calculate genotype posterior probabilities using a uniform prior (hint: look at -doPost), (iii) you want to print out the called genotype AND the posterior probabilities for all 3 possible genotypes (hint: look at -doGeno).
+A possible solution can be found [here](https://github.com/mfumagalli/Tjarno/blob/master/Files/ngs_1_solution.md).
 
 ----------------------------------------------------------------------------------
 
