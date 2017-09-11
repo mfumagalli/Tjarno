@@ -1,18 +1,16 @@
 
 ## Sample allele frequencies likelihoods and probabilities
 
-For each population, we are now calculating the sample allele frequency probabilities (what we call .saf files).
+We know that we can gather much more power if we retain the information on the uncertainty of our allele frequencies.
+For each population, we are now calculating the sample allele frequency probabilities (what ANGSD calls .saf files).
 ```
-	NIND=10
-	for i in `seq 1 2`;
-        do
-        	$ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doMajorMinor 4 -doMaf 1 -doSaf 1 -out Results/pop$i
-	done
+NIND=10
+for i in `seq 1 2`; do $ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doMajorMinor 4 -doMaf 1 -doSaf 1 -out Results/pop$i; done
 ```
 
-Let's inspect the files (for instance for population 1):
+Let's inspect these .saf files (for instance for population 1):
 ```
-	$ANGSD/misc/realSFS print Results/pop1.saf.idx | less -S
+$ANGSD/misc/realSFS print Results/pop1.saf.idx | less -S
 ```
 
 **QUESTION**
@@ -23,36 +21,34 @@ Can you identify any SNP?
 
 ## Summary statistics
 
-Now we estimate some summary statistics.
+From these probabilities we can calculate the expected values of many summary statistics.
 For instance, we can calculate the expected number of polymorphic sites in our region, in both populations separately.
-For doing that, let's calculate the probability of each site being variable (for instance, for the first 100 sites).
+For doing that, let's calculate the probability of each site being variable (for instance, for the first 1,000 sites).
 ```
-	NSITES=100
-	NIND=10
+NSITES=1000
+NIND=10
 
-	for i in `seq 1 2`;
-	do
-		zcat Results/pop$i.saf.gz > Results/pop$i.saf
-
-		$NGSTOOLS/ngsPopGen/ngsStat -npop 1 -postfiles Results/pop$i.saf -outfile Results/pop$i.stats -nind $NIND -nsites $NSITES -iswin 0
-
-	done
+for i in `seq 1 2`; do zcat Results/pop$i.saf.gz > Results/pop$i.saf; $NGSTOOLS/ngsPopGen/ngsStat -npop 1 -postfiles Results/pop$i.saf -outfile Results/pop$i.stats -nind $NIND -nsites $NSITES -iswin 0; done
 ```
 
 **QUESTION**
-
-Are these values consistent with the sample allele frequency likelihoods?
-
+If you look at them:
+```
+less -S Results/pop1.stats
+```
+are these values consistent with the sample allele frequency likelihoods?
 What's annoying here?
 
+------------------------------------------------------------------------------
+
+**QUESTION**
 If you calculate the expected number of polymorphic sites (use `-iswin 1 -block_size $NSITES`), do you obtain sensible value?
 ```
-	i=1
-	$NGSTOOLS/ngsPopGen/ngsStat -npop 1 -postfiles Results/pop$i.saf -outfile Results/pop$i.whole.stats -nind $NIND -nsites $NSITES -iswin 1 -block_size $NSITES
+i=1
+$NGSTOOLS/ngsPopGen/ngsStat -npop 1 -postfiles Results/pop$i.saf -outfile Results/pop$i.whole.stats -nind $NIND -nsites $NSITES -iswin 1 -block_size $NSITES
+cat Results/pop$i.whole.stats
 ```
-
 How can we solve this?
-
 
 --------------------------------------------------------------------
 
