@@ -13,7 +13,7 @@ mkdir Results
 You will need several software (which I'll explain later) for these exercises.
 
 * msms
-````
+```
 wget http://www.mabs.at/ewing/msms/msms3.2rc-b163.zip
 unzip msms3.2rc-b163.zip
 chmod +x ./msms/bin/msms
