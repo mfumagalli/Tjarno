@@ -1,45 +1,73 @@
 
 ## Population structure
 
-Population structure
+Now we know how to calculate genotype probabilities.
+We want to use this information to assess the structure of our populations, for instance by doing a principal component analysis (PCA).
+Again we can do that using ANGSD/ngsTools, either by calling or not calling genotypes.
+
+The first thing we need to do is to calculate genotype posterior probabilities in binary mode using `-doGeno 32`:
 ```
 $ANGSD/angsd -glf Data/pops.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doMajorMinor 4 -doMaf 1 -doPost 2 -doGeno 32 -out Results/pops.flat.bin
 gunzip Results/pops.flat.bin.geno.gz
 ```
 
-How many sites?
+**QUESTION** 
+How many sites do we have?
 ```
 NSITES=`zcat Results/pops.flat.bin.mafs.gz | tail -n +2 | wc -l`
 echo $NSITES
 ```
 
-Standard PCA
+The standard approach is to assign individual genotypes and calculate the covariance matrix as in Patterson et al. 2006.
+This can be achieved by using ngsCovar package in ngsTools:
+if you type:
 ```
-        $NGSTOOLS/ngsPopGen/ngsCovar -probfile Results/pops.flat.bin.geno -outfile Results/pops.flat.covar -nind $NIND -nsites $NSITES -call 1 -norm 1
+$NGSTOOLS/ngsPopGen/ngsCovar
+```
+you will see a help message.
 
-        Rscript -e 'write.table(cbind(rep(seq(1,10),2),rep(seq(1,10),2),c(rep("EAS",10),rep("NAM",10))), row.names=F, sep="\t", col.names=c("FID","IID","CLUSTER"), file="Results/pops.clst", quote=F)'
+**QUESTION**
+What information/files are required by reading the help message?
+What's the command line to calculate suc covariance matrix?
 
-        Rscript $NGSTOOLS/Scripts/plotPCA.R -i Results/pops.flat.covar -a Results/pops.clst -c 1-2 -o Results/pops.flat.pca.pdf
+-------------------------------------------------------------------------
 
+Here is a possible solution.
+You need to specify the number of sites and samples:
+```
+$NGSTOOLS/ngsPopGen/ngsCovar -probfile Results/pops.flat.bin.geno -outfile Results/pops.flat.covar -nind $NIND -nsites $NSITES -call 1 -norm 1
 ```
 
-Look at the plot:
+For plotting purposes, we need to create a plink cluster file to assign each sample to a population.
+This is achieved using:
 ```
-	evince Results/pops.flat.pca.pdf
+Rscript -e 'write.table(cbind(rep(seq(1,10),2),rep(seq(1,10),2),c(rep("EAS",10),rep("NAM",10))), row.names=F, sep="\t", col.names=c("FID","IID","CLUSTER"), file="Results/pops.clst", quote=F)'
+```
+
+Finally, we are able to perform an eigenvector decomposition of the covariance matrix and plot the first two components:
+```
+Rscript $NGSTOOLS/Scripts/plotPCA.R -i Results/pops.flat.covar -a Results/pops.clst -c 1-2 -o Results/pops.flat.pca.pdf
 ```
 
 **QUESTION**
+Look at the plot:
+```
+evince Results/pops.flat.pca.pdf
+```
 What's wrong here?
 
+--------------------------------------------------
+
+**EXERCISE**
 What can you do to improve your PCA?
+Perhaps we can estimate the covariance matrix by not calling genotypes but rather using their probabilities.
+Look at the help message at `$NGSTOOLS/ngsPopGen/ngsCovar` to see how you can achieve this.
+Plot the new PCA and compare it with the previous one.
+Try to plot other components (are they informative?).
+A possible solution is available [here](https://github.com/mfumagalli/Tjarno/edit/master/Files/ngs_2_solution.md).
 
-```
-	$NGSTOOLS/ngsPopGen/ngsCovar -probfile Results/pops.flat.bin.geno -outfile Results/pops.probs.covar -nind $NIND -nsites $NSITES -call 0 -norm 0
 
-	Rscript $NGSTOOLS/Scripts/plotPCA.R -i Results/pops.probs.covar -a Results/pops.clst -c 1-2 -o Results/pops.probs.pca.pdf
 
-	evince Results/pops.probs.pca.pdf
-```
 
 **QUESTION**
 
@@ -67,7 +95,7 @@ Use an informative prior and filter for minor allele frq
 
 
 
-## Additional: genetic distances
+## Very optional: genetic distances
 
 We can compute genetic distances as a basis for population clustering driectly from genotype probabilities, and not from assigned genotypes as we have seen how problematic these latters can be at low-depth.
 
