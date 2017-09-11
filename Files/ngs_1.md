@@ -2,11 +2,52 @@
 
 ## Preparation
 
-Please make sure to follow these preparatory instructions:
+Please make sure to follow these preparatory instructions.
+
+Create some folders where you will put your results and data.
 ```
 mkdir Data
 mkdir Results
 ```
+
+You will need several software (which I'll explain later) for these exercises.
+
+* msms
+````
+wget http://www.mabs.at/ewing/msms/msms3.2rc-b163.zip
+unzip msms3.2rc-b163.zip
+chmod +x ./msms/bin/msms
+```
+You need to have java installed, if not `sudo apt-get install default-jre`.
+
+* samtools
+```
+sudo apt-get install samtools
+```
+
+* ANGSD
+```
+wget http://popgen.dk/software/download/angsd/angsd0.918.tar.gz
+tar xf angsd0.918.tar.gz
+cd htslib;make;cd ..
+cd angsd
+make HTSSRC=../htslib
+cd ..
+```
+
+* ngsTools
+```
+git clone --recursive https://github.com/mfumagalli/ngsTools.git
+cd ngsTools
+make
+cd ..
+```
+Don't worry if you get an error at compiling `ngsDist`, as we won't use it today.
+
+-------------------------------------------------------------------------
+
+Then you have to create variables to store the path to these software.
+For instance, these are mine:
 ```
 MS=~/Software/msms/bin/msms
 SAMTOOLS=~/Software/samtools-1.5/samtools
