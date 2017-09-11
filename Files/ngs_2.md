@@ -69,7 +69,7 @@ What's wrong here?
 
 --------------------------------------------------
 
-**EXERCISE**
+**EXERCISE!!!**
 
 What can you do to improve your PCA?
 Perhaps we can estimate the covariance matrix by not calling genotypes but rather using their probabilities.
