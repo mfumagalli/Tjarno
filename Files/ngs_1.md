@@ -151,7 +151,7 @@ One you defined your parameters, then you can launch the command.
 The genotypes' information will be shown in the `pops.flat.geno.gz` file.
 Open the file and search for low probabilities or missing data.
 ```
-        less -S Results/pops.flat.geno.gz
+less -S Results/pops.flat.geno.gz
 ```
 
 **QUESTION** Can you identify any missing data (aka genotypes not assigned)? Why are they there?
