@@ -135,7 +135,8 @@ $ANGSD/angsd -doMajorMinor
 ```
 will tell you the available methods to assign the two most probable alleles.
 
-**EXERCISE**
+**EXERCISE!!!**
+
 Assuming that this is the backbone of your command line (you can't copy and paste this):
 ```
 NIND=20
