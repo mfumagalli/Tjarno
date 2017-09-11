@@ -1,4 +1,29 @@
 
+## Sample allele frequencies likelihoods and probabilities
+
+For each population, we are now calculating the sample allele frequency probabilities (what we call .saf files).
+```
+	NIND=10
+	for i in `seq 1 2`;
+        do
+        	$ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doMajorMinor 4 -doMaf 1 -doSaf 1 -out Results/pop$i
+	done
+```
+
+Let's inspect the files (for instance for population 1):
+```
+	$ANGSD/misc/realSFS print Results/pop1.saf.idx | less -S
+```
+
+**QUESTION**
+What are these values?
+Can you identify any SNP?
+
+
+
+
+## 2D-SFS
+
 We now want to estimate a multi-dimensional SFS, for instance the joint SFS between 2 populations (2D). 
 This can be used for making inferences on their divergence process (split time, migration rate and so on). 
 Here we are interested in estimating the 2D-SFS as prior information for our FST estimation.
