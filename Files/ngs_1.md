@@ -11,6 +11,18 @@ mkdir Results
 ```
 
 You will need several software (which I'll explain later) for these exercises.
+You should be able to load them on the server with:
+```
+module load msms/v3.2rc-b163
+
+module load samtools/v1.3.1
+
+module load angsd/v0.918
+
+module load ngsTools/vX.X
+```
+
+In case it fails, follow these instructions:
 
 * msms
 ```
