@@ -130,26 +130,37 @@ The local FST is highly informative in selection patterns.
 $ANGSD/misc/realSFS fst index Results/pop1.saf.idx Results/pop2.saf.idx -sfs Results/pops.2dsfs -fstout Results/pops -whichFst 1
 
 $ANGSD/misc/realSFS fst stats Results/pops.fst.idx
+
 ```
+The weighted value is the estimate of FST for the whole region.
 
 We can do a sliding windows scan:
 ```
 $ANGSD/misc/realSFS fst stats2 Results/pops.fst.idx -win 20000 -step 5000 > Results/pops.fst.wins
 ```
-
-single SFS
-
-2D SFS
-
-3D-SFS
-
-# FST and PBS
-
-FST and PBS
+If you open the file you can see whether there are some windows have higher values.
+```
+less -S Results/pops.fst.wins
+```
 
 # Nucleotide diversity
 
-TD 
+To confirm the selection is acting in NAM samples, we can calculate some measure of genetic diversity, as Tajima's D.
+```
+NIND=10
+i=2
+
+$ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doSaf 1 -doThetas 1 -pest Results/pop$i.sfs -out Results/pop$i
+
+# whole region value
+$ANGSD/misc/thetaStat do_stat Results/pop$i.thetas.idx
+
+# sliding windows
+$ANGSD/misc/thetaStat do_stat Results/pop$i.thetas.idx -win 20000 -step 5000
+```
+
+Once we identify potential targets of selection, we may want to test for it and quantify its features.
+We will use these summary statistics for this purpose.
 
 
 
