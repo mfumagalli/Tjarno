@@ -22,8 +22,8 @@ echo SelCoeff FST TD_EAS TD_NAM > Results/simul.txt
 MIN=0
 MAX=750
 
-# 2) sample from the prior and calculate summary statistics (assume we do just 100 simulations)
-for i in `seq 1 100`;
+# 2) sample from the prior and calculate summary statistics (assume we do just few simulations)
+for i in `seq 1 1000`;
 do
 
   selcoeff=$RANDOM
@@ -42,7 +42,7 @@ do
   # let's do something a bit different and instead of calculating summary statistics from known genotypes, let's do it from simulated NGS data, as this may lead to simulations closer to our real data
   DEPTH=4 # pick the same values you chose previously
   ERR=0.0075
-  $ANGSD/misc/msToGlf -in Data/tmp.ms -out Data/tmp -regLen 20000 -singleOut 1 -depth 20 -err 0 -pileup 0 -Nsites 1 2> /dev/null
+  $ANGSD/misc/msToGlf -in Data/tmp.ms -out Data/tmp -regLen 20000 -singleOut 1 -depth $DEPTH -err $ERR -pileup 0 -Nsites 1 2> /dev/null
   $ANGSD/misc/splitgl Data/tmp.glf.gz 20 1 10 > Data/tmp1.glf.gz 2> /dev/null
   $ANGSD/misc/splitgl Data/tmp.glf.gz 20 11 20 > Data/tmp2.glf.gz 2> /dev/null
 
