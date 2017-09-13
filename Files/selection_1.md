@@ -43,7 +43,7 @@ This allele was not present in EUR, while at low frequency in EAS, and selection
 
 We can generate such data using msms with the following command:
 ```
-$MS -N 7310 -ms 40 1 -t 350 -r 350 500000 -I 4 0 0 20 20 -n 1 1.68 -n 2 3.73 -n 3 7.29 -n 4 0.25 -eg 0 2 116 -eg 0 3 160 -ma x 0.88 0.56 0.00 0.88 x 2.79 0.00 0.56 2.79 x 0.00 0.00 0.00 0.00 x -ej 0.027 4 3 -ej 0.029 3 2 -en 0.029 2 0.29 -en 0.30 1 1 -Sp 0.5 -SI 0.0137 4 0 0 0.05 0.05 -Sc 0 3 0 0 0 -Sc 0 4 1000 500 0 -seed 1234 > Data/pops.ms
+$MS -N 7310 -ms 40 1 -t 350 -r 350 500000 -I 4 0 0 20 20 -n 1 1.68 -n 2 3.73 -n 3 7.29 -n 4 0.25 -eg 0 2 116 -eg 0 3 160 -ma x 0.88 0.56 0.00 0.88 x 2.79 0.00 0.56 2.79 x 0.00 0.00 0.00 0.00 x -ej 0.027 4 3 -ej 0.029 3 2 -en 0.029 2 0.29 -en 0.30 1 1 -Sp 0.5 -SI 0.02 4 0 0 0.05 0.05 -Sc 0 3 0 0 0 -Sc 0 4 1000 500 0 -seed 1234 > Data/pops.ms
 ```
 It's not really important how this line has been generated.
 Look at the output file.
@@ -130,9 +130,9 @@ The local FST is highly informative in selection patterns.
 $ANGSD/misc/realSFS fst index Results/pop1.saf.idx Results/pop2.saf.idx -sfs Results/pops.2dsfs -fstout Results/pops -whichFst 1
 
 $ANGSD/misc/realSFS fst stats Results/pops.fst.idx
-
 ```
 The weighted value is the estimate of FST for the whole region.
+Take a note of this value.
 
 We can do a sliding windows scan:
 ```
@@ -142,28 +142,38 @@ If you open the file you can see whether there are some windows have higher valu
 ```
 less -S Results/pops.fst.wins
 ```
+Look for the peak and record the highest value.
 
 # Nucleotide diversity
 
 To confirm the selection is acting in NAM samples, we can calculate some measure of genetic diversity, as Tajima's D.
+
+First we calculate Tajima's D along windows.
 ```
 NIND=10
-i=2
 
-$ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doSaf 1 -doThetas 1 -pest Results/pop$i.sfs -out Results/pop$i
-
-# whole region value
-$ANGSD/misc/thetaStat do_stat Results/pop$i.thetas.idx
-
-# sliding windows
-$ANGSD/misc/thetaStat do_stat Results/pop$i.thetas.idx -win 20000 -step 5000
+for i in 1 2; do $ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doSaf 1 -doThetas 1 -pest Results/pop$i.sfs -out Results/pop$i; $ANGSD/misc/thetaStat do_stat Results/pop$i.thetas.idx -win 20000 -step 5000; done
 ```
+
+Have a look at Tajima's D values for both populations, for instance NAM, indexed as 2, at column 9.
+```
+cut Results/pop1.thetas.idx.pestPG -f 3,9 | less -S
+```
+Take a note of the lowest value.
+
+**QUESTIONS** Do you observe any particular pattern?
 
 Once we identify potential targets of selection, we may want to test for it and quantify its features.
 We will use these summary statistics for this purpose.
 
+Before moving on, let's compute Tajima's D for the whole region.
+```
+for i in 1 2; do $ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/ref.fa.fai -isSim 1 -nInd $NIND -doSaf 1 -doThetas 1 -pest Results/pop$i.sfs -out Results/pop$i; $ANGSD/misc/thetaStat do_stat Results/pop$i.thetas.idx; done
+```
+Look at Tajima's D values:
+```
+cut Results/pop?.thetas.idx.pestPG -f 9
+```
 
-
-
-
+**QUESTION** Is that expected? What's happening here?
 
