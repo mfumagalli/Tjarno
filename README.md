@@ -25,7 +25,9 @@ Thursday
 
 Slides for the lecture on NGS data can be found [here](https://github.com/mfumagalli/Tjarno/blob/master/Slides/NGS/main.pdf).
 
-Slides for the lecture on selection will appear at some point.
+Slides for the lecture on selection scan can be found [here](https://github.com/mfumagalli/Tjarno/blob/master/Slides/Selection/selection.pdf).
+
+Slides on experimental design can be found [here](https://github.com/mfumagalli/Tjarno/blob/master/Slides/Selection/design.pdf).
 
 ## Exercises
 
@@ -36,7 +38,7 @@ Slides for the lecture on selection will appear at some point.
 ** [Exercise 4](https://github.com/mfumagalli/Tjarno/blob/master/Files/ngs_4.md)
 
 - Selection:
-** TBA
-
+** [Exercise 1](https://github.com/mfumagalli/Tjarno/blob/master/Files/selection_1.md)
+** [Exercise 2](https://github.com/mfumagalli/Tjarno/blob/master/Files/selection_2.md)
 
 
