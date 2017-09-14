@@ -3,7 +3,7 @@ Open R.
 
 Are the summary statistics correlated with the parameter?
 ```
-values <- read.table("Results/simul.txt", head=T, stringsAsFactors=F)
+values <- read.table("Results/simul.1K.txt", head=T, stringsAsFactors=F)
 
 cor(values)
 
