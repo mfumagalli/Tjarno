@@ -109,7 +109,7 @@ Their distribution is your approximation of the posterior distribution of your p
 
 A possible quick solution can be found [here](https://github.com/mfumagalli/Tjarno/edit/master/Files/selection_solution_2.md).
 
-Comment on the results (e.g. is the prior appropriate? can we gain more poer if you use multiple summary statistics?...)
+Comment on the results (e.g. is the prior appropriate? do we have power to estimate the parameter? does the posterior distribution follow our prior distribution? can we gain more power if we use multiple summary statistics?...)
 
 # Selection coefficient and time
 
