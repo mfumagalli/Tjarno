@@ -33,25 +33,25 @@ MAX=300
 NSIM=100
 ```
 
-**# 2) Simulate (sample from the prior) and calculate summary statistics**
+**2) Simulate (sample from the prior) and calculate summary statistics**
 
 ```
+echo SIM SELCOEFF FST
+
 for i in `seq 1 $NSIM`;
 do
 
+  # 2a) sampling from the prior
   # this is a trick to get bounded pseudo-random numbers in bash
   selcoeff=$RANDOM
   let "selcoeff %= $MAX"
-
-  # sampled value
-  echo $i $selcoeff
   selcoeffHomo=$(($selcoeff * 2)) # additive model, this is the selection coefficient at the homozygous state
 
-  # 2a) simulate data given this value for our parameter we want to estimate (you can see that -Sc is the flag to set the selection coefficient in the msms code)
+  # 2b) simulate data given this value for our parameter we want to estimate (you can see that -Sc is the flag to set the selection coefficient in the msms code)
   # note that we simulate 20kbp
   $MS -N 7310 -ms 40 1 -t 14 -r 14 20000 -I 4 0 0 20 20 -n 1 1.68 -n 2 3.73 -n 3 7.29 -n 4 0.25 -eg 0 2 116 -eg 0 3 160 -ma x 0.88 0.56 0.00 0.88 x 2.79 0.00 0.56 2.79 x 0.00 0.00 0.00 0.00 x -ej 0.027 4 3 -ej 0.029 3 2 -en 0.029 2 0.29 -en 0.30 1 1 -Sp 0.5 -SI 0.02 4 0 0 0.01 0.05 -Sc 0 3 0 0 0 -Sc 0 4 $selcoeffHomo $selcoeff 0 -seed 1234 > Data/tmp.ms
   
-  # 2b) calculate simulated summary statistics
+  # 2c) calculate simulated summary statistics
   
   # let's do something a bit different and instead of calculating summary statistics from known genotypes, let's do it from simulated NGS data, as this may lead to simulations closer to our real data (nor more noise...)
   DEPTH=4 # pick the same values you chose previously
@@ -79,6 +79,8 @@ do
   # now we have all we need, our sampled parameter and the corresponding summary statistics
   # let's save these values on a file
   echo $selcoeff $FST ${TD[*]} >> Results/simul.txt
+
+  echo $i $selcoeff $FST
 
 done
 
