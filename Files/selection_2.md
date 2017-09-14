@@ -38,7 +38,7 @@ NSIM=100
 ```
 echo SIM SELCOEFF FST
 
-for i in `seq 1 $NSIM`;
+for s in `seq 1 $NSIM`;
 do
 
   # 2a) sampling from the prior
@@ -80,7 +80,12 @@ do
   # let's save these values on a file
   echo $selcoeff $FST ${TD[*]} >> Results/simul.txt
 
-  echo $i $selcoeff $FST
+  if [ $s -eq 1 ];
+  then
+    echo SIM SELCOEFF FST
+  fi
+  
+  echo $s $selcoeff $FST
 
 done
 
