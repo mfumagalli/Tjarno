@@ -157,9 +157,9 @@ for i in 1 2; do $ANGSD/angsd -glf Data/pop$i.glf.gz -ref Data/ref.fa -fai Data/
 
 Have a look at Tajima's D values for both populations, for instance NAM, indexed as 2, at column 9.
 ```
-cut Results/pop1.thetas.idx.pestPG -f 3,9 | less -S
+cut Results/pop2.thetas.idx.pestPG -f 3,9 | less -S
 ```
-Take a note of the lowest value.
+Take a note of the lowest value or look at the value corresponding to the window with the highest FST.
 
 **QUESTIONS** Do you observe any particular pattern?
 
