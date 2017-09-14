@@ -96,8 +96,14 @@ In the simplest scenario, you can calculate the Eucledian distance between your 
 Then you retain the simulated parameters with the lowest distance.
 Their distribution is your approximation of the posterior distribution of your parameter, the selection coefficient.
 
-**EXERCISE** Using R or even a spreadsheet, first assess the correlation between each summary statistic and the parameter; then use the rejection method to derive a very approximated distribution of the selection coefficient.
+**EXERCISE** Using R or even a spreadsheet:
+- assess the correlation between each summary statistic and the parameter
+- select the most informative summary statistic
+- use the rejection method to derive a (very much) approximated distribution of the selection coefficient\\
+
 A possible quick solution can be found [here](https://github.com/mfumagalli/Tjarno/edit/master/Files/selection_solution_2.md).
+
+Comment on the results (e.g. is the prior appropriate? can we gain more poer if you use multiple summary statistics?...)
 
 # Selection coefficient and time
 
