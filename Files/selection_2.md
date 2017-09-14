@@ -93,7 +93,7 @@ If you are bored to wait, I provide you with a precompiled file [here](https://g
 If by clicking on it doesn't work, you can clone the whole repository and move the file into your folder:
 ```
 git clone https://github.com/mfumagalli/Tjarno
-cp Tjarno/Files/simul.txt Results/.
+cp Tjarno/Files/simul.1K.txt Results/.
 ```
 In this file I have 1,000 simulations.
 
