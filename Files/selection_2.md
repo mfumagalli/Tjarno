@@ -36,8 +36,6 @@ NSIM=100
 **2) Simulate (sample from the prior) and calculate summary statistics**
 
 ```
-echo SIM SELCOEFF FST
-
 for s in `seq 1 $NSIM`;
 do
 
@@ -82,10 +80,10 @@ do
 
   if [ $s -eq 1 ];
   then
-    echo SIM SELCOEFF FST
+    echo SIM COEFF FST TD
   fi
   
-  echo $s $selcoeff $FST
+  echo $s $selcoeff $FST ${TD[1]}
 
 done
 
