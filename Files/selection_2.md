@@ -90,6 +90,12 @@ done
 ```
 
 If you are bored to wait, I provide you with a precompiled file [here](https://github.com/mfumagalli/Tjarno/edit/master/Files/simul.txt).
+If by clicking on it doesn't work, you can clone the whole repository and move the file into your folder:
+```
+git clone https://github.com/mfumagalli/Tjarno
+cp Tjarno/Files/simul.txt Results/.
+```
+In this file I have 1,000 simulations.
 
 Now you have everything you need to do your inferences.
 In the simplest scenario, you can calculate the Eucledian distance between your observed summary and simulated statistics.
