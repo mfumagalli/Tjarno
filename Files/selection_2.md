@@ -33,10 +33,10 @@ MAX=300
 NSIM=100
 ```
 
-**# 2) Simulate (sample from the prior) and calculate summary statistics
+**# 2) Simulate (sample from the prior) and calculate summary statistics**
 
 ```
-for i in `seq 1 NSIM`;
+for i in `seq 1 $NSIM`;
 do
 
   # this is a trick to get bounded pseudo-random numbers in bash
