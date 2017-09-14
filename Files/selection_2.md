@@ -105,9 +105,9 @@ Their distribution is your approximation of the posterior distribution of your p
 **EXERCISE** Using R or even a spreadsheet:
 - assess the correlation between each summary statistic and the parameter
 - select the most informative summary statistic
-- use the rejection method to derive a (very much) approximated distribution of the selection coefficient\\
+- use the rejection method to derive a (very much) approximated distribution of the selection coefficient (calculate distances between observed and simulated summary statistics, selected the smallest distances and plot the corresponding selection coefficient values)\\
 
-A possible quick solution can be found [here](https://github.com/mfumagalli/Tjarno/edit/master/Files/selection_solution_2.md).
+A possible quick solution can be found [here](https://github.com/mfumagalli/Tjarno/edit/master/Files/selection_2_solution.md).
 
 Comment on the results (e.g. is the prior appropriate? do we have power to estimate the parameter? does the posterior distribution follow our prior distribution? can we gain more power if we use multiple summary statistics?...)
 
